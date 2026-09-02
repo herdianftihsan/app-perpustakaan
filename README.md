@@ -9,6 +9,11 @@
 
 ## About Laravel
 
+# Konsep Arsitektur MVC:
+- Model bertugas mengelola data, struktur tabel, dan aturan logika bisnis aplikasi.
+- View menangani tampilan antarmuka (UI) dan cara data disajikan kepada pengguna.
+- Controller bertindak sebagai jembatan yang menerima permintaan pengguna, memprosesnya lewat Model, lalu mengarahkannya ke View yang sesuai.
+
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
 - [Simple, fast routing engine](https://laravel.com/docs/routing).
