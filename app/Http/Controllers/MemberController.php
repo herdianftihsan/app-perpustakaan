@@ -7,21 +7,18 @@ use App\Http\Requests\StoreMemberRequest;
 use Illuminate\Http\Request;
 
 class MemberController extends Controller
-{   
+{
     private array $member = [
-        ['id'=>1,'nama' => 'Herdian','nim' => '4567432','email' => 'herdian@gmail.com','nomor_telepon' =>'082121313123','alamat' => 'di gebang rt.1','status' => 'aktif'],
-        ['id'=>2,'nama' => 'gema','nim' => '4567432','email' => 'gema@gmail.com','nomor_telepon'=>'082121313123','alamat' => 'di gebang rt.3','status' => 'aktif'],
-        ['id'=>3,'nama' => 'Alvin','nim' => '4567432','email' => 'alvin@gmail.com','nomor_telepon'=>'082121313123','alamat' => 'di keputih rt.1','status' => 'aktif'],
+        ['id' => 1, 'nama' => 'Siti Aminah', 'nim' => '2310501001', 'email' => 'siti.aminah@pens.ac.id', 'nomor_telepon' => '081234567890', 'status' => 'aktif'],
+        ['id' => 2, 'nama' => 'Budi Santoso', 'nim' => '2310501002', 'email' => 'budi.santoso@pens.ac.id', 'nomor_telepon' => '081298765432', 'status' => 'aktif'],
+        ['id' => 3, 'nama' => 'Dewi Lestari', 'nim' => '2310501003', 'email' => 'dewi.lestari@pens.ac.id', 'nomor_telepon' => '081211122233', 'status' => 'nonaktif'],
     ];
 
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $members = $this->member;
 
-        return view('members.index',compact('members'));
+        return view('members.index', compact('members'));
     }
 
     /**
