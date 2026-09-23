@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Http\Requests\StoreMemberRequest;
-
-
+use App\Models\Member;
 use Illuminate\Http\Request;
 
 class MemberController extends Controller
@@ -16,7 +15,10 @@ class MemberController extends Controller
 
     public function index()
     {
-        $members = $this->member;
+        $members = Member::when(
+            request('search'),
+            fn($query, $search) => $query->where('nama', 'like', "%{$search}%")
+        )->paginate(10);
 
         return view('members.index', compact('members'));
     }
@@ -26,9 +28,8 @@ class MemberController extends Controller
      */
     public function create()
     {
-        $members = $this->member;
         
-        return view('members.create',compact('members'));
+        return view('members.create');
     }
 
     /**
@@ -37,6 +38,8 @@ class MemberController extends Controller
     public function store(StoreMemberRequest $request)
     {
         $validated = $request->validated();
+
+        Member::create($validated);
 
         return redirect()->route('members.index')
             ->with('success', "Member \"{$validated['nama']}\" berhasil ditambahkan (data dummy, belum tersimpan ke database).");
@@ -47,7 +50,10 @@ class MemberController extends Controller
      */
     public function show(string $id)
     {
-        return "MemberController@show,id: {$id}";
+        $members = Member::finOrFail($id);
+        
+
+        return view('members.show',compact('members'));
         
     }
 
@@ -56,7 +62,8 @@ class MemberController extends Controller
      */
     public function edit(string $id)
     {
-        return "MemberController@edit,id:{$id}";
+        $members = Member::findOrFail($id);
+        return view('members.edit',compact('members'));
     }
 
     /**
@@ -64,7 +71,20 @@ class MemberController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        return "MemberController@update,id:{$id}";
+        $members = Member::findOrFail($id);
+
+        $validate = $request->validate([
+            'nama' => 'required|string|min:3',
+            "nim" => 'required',
+            'email' => 'required',
+            'nomor_telepon' => 'required|min:12',
+            'alamat' => 'required',
+            'status' => 'required'
+        ]);
+
+        $members->update($validate);
+        return redirect()->route('members.index')
+            ->with('success', "Member \"{$validate['nama']}\" berhasil diperbarui (data dummy, belum tersimpan ke database).");
     }
 
     /**
@@ -72,7 +92,10 @@ class MemberController extends Controller
      */
     public function destroy(string $id)
     {
-        return "MemberController@destroy,id:{$id}";
+        $members = Member::findOrFail($id);
+        $members->delete();
+        return redirect()->route('members.index')
+            ->with('success', 'Kategori berhasil dihapus.');
         
     }
 }

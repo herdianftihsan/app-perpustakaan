@@ -16,6 +16,7 @@
                 <th>Penerbit</th>
                 <th>Tahun</th>
                 <th>Stok</th>
+                <th>ISBN</th>
                 <th>Kategori</th>
                 <th>Aksi</th>
             </tr>
@@ -23,13 +24,14 @@
         <tbody>
             @forelse ($books as $book)
                 <tr>
-                    <td>{{ $book['id'] }}</td>
-                    <td>{{ $book['judul'] }}</td>
-                    <td>{{ $book['penulis'] }}</td>
-                    <td>{{ $book['penerbit'] }}</td>
-                    <td>{{ $book['tahun_terbit'] }}</td>
-                    <td>{{ $book['stok'] }}</td>
-                    <td>{{ $book['kategori'] }}</td>
+                    <td>{{ $book->id }}</td>
+                    <td>{{ $book->judul }}</td>
+                    <td>{{ $book->penulis }}</td>
+                    <td>{{ $book->penerbit }}</td>
+                    <td>{{ $book->tahun_terbit }}</td>
+                    <td>{{ $book->stok}}</td>
+                    <td>{{ $book->isbn}}</td>
+                    <td>{{ $book->category_id}}</td>
                     <td>
                         <a href="{{ route('books.show', $book['id']) }}">Detail</a>
                         |
