@@ -14,4 +14,9 @@ class Member extends Model
         'alamat',
         'status',
     ];
+
+    public function loans()
+    {
+        return $this->hasMany(Loan::class);
+    }
 }

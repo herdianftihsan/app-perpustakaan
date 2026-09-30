@@ -31,7 +31,7 @@
                     <td>{{ $book->tahun_terbit }}</td>
                     <td>{{ $book->stok}}</td>
                     <td>{{ $book->isbn}}</td>
-                    <td>{{ $book->category_id}}</td>
+                    <td>{{ $book->category->nama_kategori}}</td>
                     <td>
                         <a href="{{ route('books.show', $book['id']) }}">Detail</a>
                         |
@@ -53,4 +53,5 @@
     </table>
 
     <p><em>Catatan: data di atas masih data dummy (array statis di Controller), belum dari database. Migration &amp; Model Eloquent baru dibuat di Pertemuan 5.</em></p>
+    {{ $books->links() }}
 @endsection

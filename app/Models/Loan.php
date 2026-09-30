@@ -14,4 +14,19 @@ class Loan extends Model
         'tanggal_dikembalikan',
         'status',
     ];
+
+    public function member()
+    {
+        return $this->belongsTo(Member::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function loanItems()
+    {
+        return $this->hasMany(LoanItem::class);
+    }
 }

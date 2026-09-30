@@ -7,11 +7,6 @@ use Illuminate\Http\Request;
 
 class MemberController extends Controller
 {
-    private array $member = [
-        ['id' => 1, 'nama' => 'Siti Aminah', 'nim' => '2310501001', 'email' => 'siti.aminah@pens.ac.id', 'nomor_telepon' => '081234567890', 'status' => 'aktif'],
-        ['id' => 2, 'nama' => 'Budi Santoso', 'nim' => '2310501002', 'email' => 'budi.santoso@pens.ac.id', 'nomor_telepon' => '081298765432', 'status' => 'aktif'],
-        ['id' => 3, 'nama' => 'Dewi Lestari', 'nim' => '2310501003', 'email' => 'dewi.lestari@pens.ac.id', 'nomor_telepon' => '081211122233', 'status' => 'nonaktif'],
-    ];
 
     public function index()
     {
@@ -50,10 +45,10 @@ class MemberController extends Controller
      */
     public function show(string $id)
     {
-        $members = Member::finOrFail($id);
+        $member = Member::with('loans.loanItems.book','loans.user')->findOrFail($id);
         
 
-        return view('members.show',compact('members'));
+        return view('members.show',compact('member'));
         
     }
 

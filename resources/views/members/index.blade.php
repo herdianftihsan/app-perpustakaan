@@ -39,6 +39,7 @@
                     <td>{{ ucfirst($member['status']) }}</td>
                     <td>
                         <a href="{{ route('members.edit', $member['id']) }}">Edit</a>
+                        <a href="{{ route('members.show', $member['id']) }}">Show</a>
                         |
                         <form class="inline" action="{{ route('members.destroy', $member['id']) }}" method="POST">
                             @csrf
@@ -54,7 +55,9 @@
             @endforelse
         </tbody>
     </table>
-    {{ $members->appends(request()->query())->links() }}
+    <div class="d-flex justify-content-center mt-4">
+        {{ $members->appends(request()->query())->links() }}
+    </div>
 
     <p><em>Catatan: data di atas masih data dummy (array statis di Controller). Form tambah/edit anggota dan CRUD lengkap anggota baru dibuat mulai Pertemuan 5.</em></p>
 @endsection
